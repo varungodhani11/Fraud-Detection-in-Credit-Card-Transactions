@@ -23,7 +23,27 @@ The project includes exploratory data analysis, preprocessing, feature scaling, 
 
 ## Dataset
 
-The project uses the commonly used Credit Card Fraud Detection dataset containing transactions made by European cardholders.
+The project uses the Credit Card Fraud Detection dataset containing transactions made by European cardholders.
+
+### Dataset Source
+
+The dataset was obtained from Kaggle:
+
+https://www.kaggle.com/mlg-ulb/creditcardfraud
+
+### Dataset Setup
+
+To run the notebook locally:
+
+1. Download the dataset from Kaggle.
+2. Extract the downloaded files.
+3. Place `creditcard.csv` inside the project's `data/` folder.
+
+Expected local path:
+
+```text
+data/creditcard.csv
+```
 
 The dataset contains:
 
@@ -51,7 +71,9 @@ After duplicate removal:
 - Normal transactions: `283,253`
 - Fraudulent transactions: `473`
 
-The final model uses the 30 input features: `Time`, `V1`–`V28`, and `Amount`.
+The final model uses the 30 input features:
+
+`Time`, `V1`–`V28`, and `Amount`.
 
 ## Machine Learning Workflow
 
@@ -156,7 +178,7 @@ The application uses these artifacts to:
 3. Select the required 30 features.
 4. Apply the saved scaler.
 5. Generate fraud probabilities.
-6. Apply the saved classification threshold.
+6. Apply the selected classification threshold.
 7. Return `Fraud` or `Normal` predictions.
 8. Display and download prediction results.
 
@@ -242,6 +264,8 @@ Fraud-Detection-in-Credit-Card-Transactions/
 └── LICENSE
 ```
 
+> Note: The original `creditcard.csv` dataset is not included in the GitHub repository. Download it separately from the Kaggle source and place it in the `data/` directory as described above.
+
 ## Technologies Used
 
 - Python
@@ -270,6 +294,12 @@ Install the required dependencies:
 pip install -r requirements.txt
 ```
 
+Download the dataset from Kaggle and place it at:
+
+```text
+data/creditcard.csv
+```
+
 ## Run the Streamlit Application
 
 From the project root directory:
@@ -280,6 +310,8 @@ streamlit run app.py
 
 The application will open in the browser.
 
+The Streamlit application does not require the original `creditcard.csv` dataset for prediction because it uses the saved trained model artifact.
+
 ## Model Artifact
 
 The trained model and preprocessing components are stored in:
@@ -288,7 +320,18 @@ The trained model and preprocessing components are stored in:
 models/fraud_detection_model.joblib
 ```
 
-The artifact is loaded by `src/prediction.py`.
+The artifact contains:
+
+- Trained XGBoost model
+- Fitted scaler
+- Selected classification threshold
+- Required feature names
+
+The artifact is loaded by:
+
+```text
+src/prediction.py
+```
 
 ## Notebook
 
@@ -298,7 +341,19 @@ The complete machine learning workflow is available in:
 notebook/Fraud_Detection_in_Credit_Card_Transactions.ipynb
 ```
 
-The notebook covers EDA, preprocessing, model training, validation, threshold tuning, evaluation, feature importance, prediction testing, and model artifact creation.
+The notebook covers:
+
+- Exploratory data analysis
+- Data preprocessing
+- Model training
+- Validation
+- Threshold tuning
+- Model evaluation
+- Confusion matrices
+- ROC and precision-recall analysis
+- Feature importance
+- Single-transaction prediction testing
+- Model artifact creation
 
 ## Important Notes
 
@@ -307,6 +362,7 @@ The notebook covers EDA, preprocessing, model training, validation, threshold tu
 - A fraud prediction is a model output and should not be treated as a definitive determination of fraud.
 - The application expects transaction features compatible with the training data.
 - The trained model was evaluated on a held-out test set.
+- The original dataset is excluded from version control through `.gitignore`.
 
 ## Future Improvements
 
